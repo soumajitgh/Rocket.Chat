@@ -3,8 +3,7 @@ import './meteor/startup';
 import './serviceWorker';
 
 import('@rocket.chat/fuselage-polyfills')
-	.then(() => import('./meteor/login'))
-	.then(() => import('./ecdh'))
+	.then(() => import('./meteor/overrides'))
 	.then(() => import('./importPackages'))
 	.then(() => import('./startup'))
 	.then(() =>
