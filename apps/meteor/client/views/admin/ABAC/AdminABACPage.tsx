@@ -3,13 +3,14 @@ import { useEffectEvent } from '@rocket.chat/fuselage-hooks';
 import { useRouteParameter, useRouter } from '@rocket.chat/ui-contexts';
 import { Trans, useTranslation } from 'react-i18next';
 
+import AdminABACLogs from './AdminABACLogs';
 import AdminABACRoomAttributes from './AdminABACRoomAttributes';
 import AdminABACSettings from './AdminABACSettings';
 import AdminABACTabs from './AdminABACTabs';
 import RoomAttributesContextualBar from './RoomAttributesContextualBar';
 import RoomAttributesContextualBarWithData from './RoomAttributesContextualBarWithData';
 import useIsABACAvailable from './hooks/useIsABACAvailable';
-import { ContextualbarDialog } from '../../../components/Contextualbar';
+import { ContextualbarDialog, ContextualbarSkeletonBody } from '../../../components/Contextualbar';
 import { Page, PageContent, PageHeader } from '../../../components/Page';
 import { useExternalLink } from '../../../hooks/useExternalLink';
 import { links } from '../../../lib/links';
@@ -65,6 +66,7 @@ const AdminABACPage = ({ shouldShowWarning }: AdminABACPageProps) => {
 				<PageContent>
 					{tab === 'settings' && <AdminABACSettings />}
 					{tab === 'room-attributes' && <AdminABACRoomAttributes />}
+					{tab === 'logs' && <AdminABACLogs />}
 				</PageContent>
 			</Page>
 			{tab === 'room-attributes' && context !== undefined && (
