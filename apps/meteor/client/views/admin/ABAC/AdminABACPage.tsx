@@ -10,7 +10,7 @@ import AdminABACTabs from './AdminABACTabs';
 import RoomAttributesContextualBar from './RoomAttributesContextualBar';
 import RoomAttributesContextualBarWithData from './RoomAttributesContextualBarWithData';
 import useIsABACAvailable from './hooks/useIsABACAvailable';
-import { ContextualbarDialog, ContextualbarSkeletonBody } from '../../../components/Contextualbar';
+import { ContextualbarDialog } from '../../../components/Contextualbar';
 import { Page, PageContent, PageHeader } from '../../../components/Page';
 import { useExternalLink } from '../../../hooks/useExternalLink';
 import { links } from '../../../lib/links';
