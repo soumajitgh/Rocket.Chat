@@ -94,8 +94,7 @@ const AdminABACLogs = () => {
 			element: t('ABAC_Room'),
 			userAvatar: event.actor?.type === 'user' ? <UserAvatar size='x28' userId={event.actor._id} /> : null,
 			user: event.actor?.type === 'user' ? event.actor.username : t('System'),
-			// @ts-expect-error - TODO: Send the room name in the endpoint response
-			name: event.data?.find((item) => item.key === 'room')?.value?._id ?? '',
+			name: event.data?.find((item) => item.key === 'room')?.value?.name ?? '',
 			action: getActionLabel(event.data?.find((item) => item.key === 'change')?.value),
 			timestamp: new Date(event.ts),
 		};
