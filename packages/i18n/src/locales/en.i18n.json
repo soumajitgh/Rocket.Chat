@@ -28,7 +28,7 @@
   "ABAC_Room": "Room",
   "ABAC_Room_Attribute": "Room Attribute",
   "ABAC_Element": "ABAC Element",
-  "ABAC_Element_name": "Element Name",
+  "ABAC_Element_Name": "Element Name",
   "ABAC_Cannot_delete_attribute": "Cannot delete attribute assigned to rooms",
   "ABAC_Cannot_delete_attribute_content": "Unassign <bold>{{attributeName}}</bold> from all rooms before attempting to delete it.",
   "ABAC_Delete_room_attribute": "Delete attribute",

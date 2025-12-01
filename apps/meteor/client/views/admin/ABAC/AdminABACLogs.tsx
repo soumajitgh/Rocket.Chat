@@ -138,7 +138,7 @@ const AdminABACLogs = () => {
 							<GenericTableHeaderCell>{t('User')}</GenericTableHeaderCell>
 							<GenericTableHeaderCell>{t('Action')}</GenericTableHeaderCell>
 							<GenericTableHeaderCell>{t('ABAC_Element')}</GenericTableHeaderCell>
-							<GenericTableHeaderCell>{t('ABAC_Element_name')}</GenericTableHeaderCell>
+							<GenericTableHeaderCell>{t('ABAC_Element_Name')}</GenericTableHeaderCell>
 							<GenericTableHeaderCell>{t('Timestamp')}</GenericTableHeaderCell>
 						</GenericTableHeader>
 						<GenericTableBody>
