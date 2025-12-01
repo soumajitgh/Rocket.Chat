@@ -122,7 +122,7 @@ export const ABACQueryKeys = {
 	all: ['abac'] as const,
 	logs: {
 		all: () => [...ABACQueryKeys.all, 'logs'] as const,
-		logsList: (query?: PaginatedRequest) => [...ABACQueryKeys.logs.all(), 'logs-list', query] as const,
+		list: (query?: PaginatedRequest) => [...ABACQueryKeys.logs.all(), 'list', query] as const,
 	},
 	roomAttributes: {
 		all: () => [...ABACQueryKeys.all, 'room-attributes'] as const,

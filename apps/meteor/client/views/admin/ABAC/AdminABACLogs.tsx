@@ -18,6 +18,7 @@ import {
 	GenericTableRow,
 } from '../../../components/GenericTable';
 import { usePagination } from '../../../components/GenericTable/hooks/usePagination';
+import { useFormatDateAndTime } from '../../../hooks/useFormatDateAndTime';
 import { ABACQueryKeys } from '../../../lib/queryKeys';
 import DateRangePicker from '../moderation/helpers/DateRangePicker';
 
@@ -26,6 +27,8 @@ const AdminABACLogs = () => {
 
 	const [startDate, setStartDate] = useState<string>(new Date().toISOString().split('T')[0]);
 	const [endDate, setEndDate] = useState<string>(new Date().toISOString().split('T')[0]);
+
+	const formatDate = useFormatDateAndTime();
 
 	const { current, itemsPerPage, setItemsPerPage, setCurrent, ...paginationProps } = usePagination();
 	const getLogs = useEndpoint('GET', '/v1/abac/audit');
@@ -45,7 +48,7 @@ const AdminABACLogs = () => {
 	}, [startDate, endDate, setCurrent]);
 
 	const { data, isLoading } = useQuery({
-		queryKey: ABACQueryKeys.logs.logsList(query),
+		queryKey: ABACQueryKeys.logs.list(query),
 		queryFn: () => getLogs(query),
 	});
 
@@ -76,7 +79,7 @@ const AdminABACLogs = () => {
 
 	const getEventInfo = (
 		event: Serialized<OperationResult<'GET', '/v1/abac/audit'>>['events'][number],
-	): { element: string; userAvatar: ReactNode; user: string; name: string; action: string; timestamp: string } => {
+	): { element: string; userAvatar: ReactNode; user: string; name: string; action: string; timestamp: Date } => {
 		if (event.t === 'abac.attribute.changed') {
 			return {
 				element: t('ABAC_Room_Attribute'),
@@ -84,7 +87,7 @@ const AdminABACLogs = () => {
 				user: event.actor?.type === 'user' ? event.actor.username : t('System'),
 				name: event.data?.find((item) => item.key === 'attributeKey')?.value ?? '',
 				action: getActionLabel(event.data?.find((item) => item.key === 'change')?.value),
-				timestamp: new Date(event.ts).toLocaleString(),
+				timestamp: new Date(event.ts),
 			};
 		}
 		return {
@@ -94,7 +97,7 @@ const AdminABACLogs = () => {
 			// @ts-expect-error - TODO: Send the room name in the endpoint response
 			name: event.data?.find((item) => item.key === 'room')?.value?._id ?? '',
 			action: getActionLabel(event.data?.find((item) => item.key === 'change')?.value),
-			timestamp: event.ts.toLocaleString(),
+			timestamp: new Date(event.ts),
 		};
 	};
 
@@ -114,7 +117,6 @@ const AdminABACLogs = () => {
 							placeholder={t('End_date')}
 							value={endDate}
 							onChange={(e) => setEndDate((e.target as HTMLInputElement).value)}
-							mis={8}
 						/>
 					</Margins>
 					<Margins inlineStart={8}>
@@ -155,7 +157,7 @@ const AdminABACLogs = () => {
 										<GenericTableCell>{eventInfo.action}</GenericTableCell>
 										<GenericTableCell>{eventInfo.element}</GenericTableCell>
 										<GenericTableCell>{eventInfo.name}</GenericTableCell>
-										<GenericTableCell>{eventInfo.timestamp}</GenericTableCell>
+										<GenericTableCell>{formatDate(eventInfo.timestamp)}</GenericTableCell>
 									</GenericTableRow>
 								);
 							})}
